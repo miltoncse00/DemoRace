@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DemoRace.Common.Interfaces
 {
-    class IRaceBusiness
+    public interface IRaceBusiness
     {
+       Task<RaceSummary> GetRaceSummary();
     }
 }

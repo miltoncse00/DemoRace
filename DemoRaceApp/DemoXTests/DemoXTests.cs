@@ -11,7 +11,7 @@ namespace DemoXTests
     public class DemoXTests
     {
         IRaceContext context;
-        List<Customer> customers = new List<Customer>();;
+        List<Customer> customers = new List<Customer>();
         List<Race> races = new List<Race>();
         List<Bet> bets= new List<Bet>();
 
