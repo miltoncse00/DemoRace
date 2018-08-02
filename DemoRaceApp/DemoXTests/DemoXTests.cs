@@ -45,6 +45,9 @@ namespace DemoXTests
             var summaries = await raceBusiness.GetRaceSummary();
             summaries.First().Status.Should().Be(RaceStatus.Completed.ToString());
             summaries.First().Stake.Should().Be(250 );
+            summaries.First().Hourses.Count.Should().Be(2);
+            summaries.First().Hourses[0].BetCount.Should().Be(1);
+            summaries.First().Hourses[0].PayOut.Should().Be(150);
 
         }
 
