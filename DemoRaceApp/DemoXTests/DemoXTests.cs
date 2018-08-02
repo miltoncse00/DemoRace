@@ -44,6 +44,8 @@ namespace DemoXTests
             await SetUpIntialTestData1();
             var summaries = await raceBusiness.GetRaceSummary();
             summaries.First().Status.Should().Be(RaceStatus.Completed.ToString());
+            summaries.First().Stake.Should().Be(250 );
+
         }
 
 
