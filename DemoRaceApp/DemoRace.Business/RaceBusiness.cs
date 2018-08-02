@@ -17,9 +17,19 @@ namespace DemoRace.Business
             this.context = context;
         }
 
-        public Task<IList<CustomerSummary>> GetCustomerSummary()
+        public  async Task<CustomerBetSummary> GetCustomerBetsSummary()
         {
-            throw new NotImplementedException();
+            var customerbetsSummary = new CustomerBetSummary();
+            customerbetsSummary.CustomerSummaries = new List<CustomerSummary>();
+            var customers = await context.CustomerRepository.GetAll();
+            foreach(var customer in customers)
+            {
+                var customerSummary = new CustomerSummary();
+                customerSummary.Id = customer.Id;
+                customerSummary.Name = customer.Name;
+                customerbetsSummary.CustomerSummaries.Add(customerSummary);
+            }
+            return customerbetsSummary;
         }
 
         public async Task<IList<RaceSummary>> GetRaceSummary()

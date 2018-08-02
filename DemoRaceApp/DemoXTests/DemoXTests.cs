@@ -52,6 +52,15 @@ namespace DemoXTests
         }
 
 
+        [Fact]
+        public async void CheckCustomerBetSummaryWithCustomerCount2()
+        {
+            await SetUpIntialTestData1();
+            var summary = await raceBusiness.GetCustomerBetsSummary();
+            summary.CustomerSummaries.Count.Should().Be(2);
+        }
+
+
         private async System.Threading.Tasks.Task SetUpIntialTestData1()
         {
             customers.Clear();
