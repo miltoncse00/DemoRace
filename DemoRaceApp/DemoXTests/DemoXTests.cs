@@ -4,6 +4,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using Xunit;
+using FluentAssertions;
 
 namespace DemoXTests
 {
@@ -13,7 +14,7 @@ namespace DemoXTests
         IRaceContext context;
         List<Customer> customers = new List<Customer>();
         List<Race> races = new List<Race>();
-        List<Bet> bets= new List<Bet>();
+        List<Bet> bets = new List<Bet>();
 
         public DemoXTests()
         {
@@ -26,11 +27,55 @@ namespace DemoXTests
             context = mock.Object;
         }
         [Fact]
-        public async void Test1()
+        public async void SetUpIntialTestData()
         {
-            var data = await context.RaceRepository.GetAll();
+            customers.Clear();
+            PopulateCustomer1();
+            var actualCustomers = await context.CustomerRepository.GetAll();
+            actualCustomers.Count.Should().Be(2);
+            actualCustomers[0].Name.Should().Be("Rob");
+            bets.Clear();
+            PopulateBet1();
+            var actualBets = await context.BetRepository.GetAll();
+            actualBets.Count.Should().Be(2);
+            actualBets[0].Stake.Should().Be(100);
+            races.Clear();
+            PopulateRaces1();
+            var actualRaces = await context.RaceRepository.GetAll();
+            actualRaces.Count.Should().Be(1);
+            actualRaces[0].Horses.Count.Should().Be(2);
+            actualRaces[0].Horses[0].Odds.Should().Be(1.5M);
 
-            Assert.True(data.Count > 0);
         }
+
+        private void PopulateCustomer1()
+        {
+            customers.Add(new Customer() { Id = 1, Name = "Rob" });
+            customers.Add(new Customer() { Id = 3, Name = "Mark" });
+        }
+
+        private void PopulateBet1()
+        {
+            bets.Add(new Bet() { CustomerId = 1, HorseId = 1, RaceId = 1, Stake = 100, Won = true });
+            bets.Add(new Bet() { CustomerId = 3, HorseId = 2, RaceId = 1, Stake = 150, Won = true });
+        }
+
+        private void PopulateRaces1()
+        {
+            races.Add(new Race()
+            {
+                Id = 1,
+                Name = "R1",
+                Start = DateTime.Now.AddDays(-1),
+                Status = RaceStatus.Completed.ToString(),
+                Horses = new List<Horse>
+            {
+                new Horse(){ Id = 1, Name="Little Orange", Odds= 1.5M },
+                new Horse(){ Id=2 , Name="Big Orange", Odds=5.5M}
+            }
+            });
+            //races.Add(new Bet() { CustomerId = 3, HorseId = 2, RaceId = 1, Stake = 150, Won = true });
+        }
+
     }
 }
