@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 using FluentAssertions;
+using DemoRace.Common.Interfaces;
+using DemoRace.Business;
 
 namespace DemoXTests
 {
@@ -12,6 +14,7 @@ namespace DemoXTests
     public class DemoXTests
     {
         IRaceContext context;
+        IRaceBusiness raceBusiness;
         List<Customer> customers = new List<Customer>();
         List<Race> races = new List<Race>();
         List<Bet> bets = new List<Bet>();
@@ -25,9 +28,24 @@ namespace DemoXTests
             mock.Setup(x => x.RaceRepository).Returns(new FakeRepository<Race>(races));
 
             context = mock.Object;
+            raceBusiness = new RaceBusiness(context);
         }
         [Fact]
         public async void SetUpIntialTestData()
+        {
+            await SetUpIntialTestData1();
+
+        }
+
+        [Fact]
+        public async void CheckStatusOfRaceWithIntialSetupShouldBeCompleted()
+        {
+            var summary = await raceBusiness.GetRaceSummary();
+            summary.Status.Should().Be(RaceStatus.Completed.ToString());
+        }
+
+
+        private async System.Threading.Tasks.Task SetUpIntialTestData1()
         {
             customers.Clear();
             PopulateCustomer1();
@@ -45,7 +63,6 @@ namespace DemoXTests
             actualRaces.Count.Should().Be(1);
             actualRaces[0].Horses.Count.Should().Be(2);
             actualRaces[0].Horses[0].Odds.Should().Be(1.5M);
-
         }
 
         private void PopulateCustomer1()

@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DemoRace.Business\DemoRace.Business.csproj" />
     <ProjectReference Include="..\DemoRace.Common\DemoRace.Common.csproj" />
     <ProjectReference Include="..\DemoRace.Data\DemoRace.Data.csproj" />
   </ItemGroup>
