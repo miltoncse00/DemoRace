@@ -7,6 +7,6 @@ namespace DemoRace.Common.Interfaces
 {
     public interface IRaceBusiness
     {
-       Task<RaceSummary> GetRaceSummary();
+       Task<IList<RaceSummary>> GetRaceSummary();
     }
 }

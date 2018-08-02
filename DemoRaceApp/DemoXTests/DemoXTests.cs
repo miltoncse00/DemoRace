@@ -7,6 +7,7 @@ using Xunit;
 using FluentAssertions;
 using DemoRace.Common.Interfaces;
 using DemoRace.Business;
+using System.Linq;
 
 namespace DemoXTests
 {
@@ -40,8 +41,9 @@ namespace DemoXTests
         [Fact]
         public async void CheckStatusOfRaceWithIntialSetupShouldBeCompleted()
         {
-            var summary = await raceBusiness.GetRaceSummary();
-            summary.Status.Should().Be(RaceStatus.Completed.ToString());
+            await SetUpIntialTestData1();
+            var summaries = await raceBusiness.GetRaceSummary();
+            summaries.First().Status.Should().Be(RaceStatus.Completed.ToString());
         }
 
 

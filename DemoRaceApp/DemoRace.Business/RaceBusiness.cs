@@ -16,11 +16,18 @@ namespace DemoRace.Business
             this.context = context;
         }
 
-        public async Task<RaceSummary> GetRaceSummary()
+        public async Task<IList<RaceSummary>> GetRaceSummary()
         {
-            var summary = new RaceSummary();
-
-            return await Task.Run(() => summary);
+            var raceSummaries = new List<RaceSummary>();
+            var races = await context.RaceRepository.GetAll();
+            if (races != null && races.Count > 0)
+                foreach (var race in races)
+                {
+                    var raceSummary = new RaceSummary();
+                    raceSummary.Status = race.Status;
+                    raceSummaries.Add(raceSummary);
+                }
+            return raceSummaries;
         }
     }
 }
