@@ -1,0 +1,48 @@
+﻿[
+  {
+    "id": 1,
+    "name": "R1",
+    "start": "2018-08-02T02:00:00+00:00",
+    "status": "completed",
+    "horses": [
+      {
+        "id": 11,
+        "name": "Big Orange",
+        "odds": 5.5
+      },
+      {
+        "id": 12,
+        "name": "OUR IVANHOWE",
+        "odds": 1.5
+      },
+      {
+        "id": 13,
+        "name": "CURREN MIROTIC",
+        "odds": 3
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "R2",
+    "start": "2018-08-02T03:00:00+00:00",
+    "status": "completed",
+    "horses": [
+      {
+        "id": 21,
+        "name": "BONDI BEACH",
+        "odds": 5.5
+      },
+      {
+        "id": 22,
+        "name": "EXOSPHERIC",
+        "odds": 1.5
+      },
+      {
+        "id": 23,
+        "name": "HARTNELL",
+        "odds": 3
+      }
+    ]
+  }
+]
