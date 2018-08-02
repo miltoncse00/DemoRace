@@ -8,9 +8,9 @@ namespace DemoRace.Common
     public class Customer
     {
         [JsonProperty(PropertyName = "id")]
-        int Id { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty(PropertyName = "name")]
-        string Name { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -7,15 +7,15 @@ namespace DemoRace.Common
 {
     public class Race
     {
-        [JsonProperty(PropertyName ="Id")]
+        [JsonProperty(PropertyName = "Id")]
         public int Id { get; set; }
-        [JsonProperty(PropertyName ="name")]
+        [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
-        [JsonProperty(PropertyName ="start")]
+        [JsonProperty(PropertyName = "start")]
         public DateTime Start { get; set; }
-        [JsonProperty(PropertyName ="status")]
+        [JsonProperty(PropertyName = "status")]
         public string Status { get; set; }
-        [JsonProperty(PropertyName ="horses")]
-        IList<Horse> Horses { get; set; }
+        [JsonProperty(PropertyName = "horses")]
+        public IList<Horse> Horses { get; set; }
     }
 }
