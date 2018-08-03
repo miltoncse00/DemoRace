@@ -39,6 +39,7 @@ namespace DemoXTests
         }
 
         [Fact]
+        //Implemented The requirement of Race Summary from Unit testing with adding assertion one by one.
         public async void CheckStatusOfRaceWithIntialSetupShouldBeCompletedAndDetails()
         {
             await SetUpIntialTestData1();
@@ -53,6 +54,8 @@ namespace DemoXTests
 
 
         [Fact]
+        //Implemented The requirement of Customer Bet Summary from Unit testing with adding assertion one by one.
+
         public async void CheckCustomerBetSummaryWithCustomerCount2andDetails()
         {
             await SetUpIntialTestData2();
