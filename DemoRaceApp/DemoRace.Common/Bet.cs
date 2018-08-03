@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace DemoRace.Common
@@ -13,7 +14,7 @@ namespace DemoRace.Common
         public int RaceId { get; set; }
         [JsonProperty(PropertyName = "horseId")]
         public int HorseId { get; set; }
-        [JsonProperty(PropertyName = "returnStake")]
+        [JsonProperty(PropertyName = "stake")]
         public decimal Stake { get; set; }
         [JsonProperty(PropertyName = "won")]
         public bool Won { get; set; }

@@ -60,6 +60,7 @@ namespace DemoXTests
             summary.CustomerSummaries.Count.Should().Be(2);
             summary.CustomerSummaries[0].BetCount.Should().Be(2);
             summary.CustomerSummaries[0].BestAmount.Should().Be(250);
+            summary.TotalBets.Should().Be(250);
         }
 
 

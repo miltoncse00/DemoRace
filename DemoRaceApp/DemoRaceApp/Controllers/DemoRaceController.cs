@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DemoRace.Common;
 using DemoRace.Common.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DemoRaceApp.Controllers
 {
-    [Route("api/[DemoRace]")]
+    [Route("api/DemoRace")]
     [ApiController]
     public class DemoRaceController : ControllerBase
     {
@@ -19,13 +20,24 @@ namespace DemoRaceApp.Controllers
             this.raceBusiness = raceBusiness;
         }
 
-        [Route("CustomerSummary")]
+        [Route("CustomerBetsSummary")]
         [HttpGet]
+        [Produces("application/json", Type = typeof(CustomerBetSummary))]
         public async Task<IActionResult> GetCustomerSummary()
         {
-           var customerSummary = await raceBusiness.GetCustomerBetsSummary();
+           var customerBetSummary = await raceBusiness.GetCustomerBetsSummary();
 
-            return Ok(customerSummary);
+            return Ok(customerBetSummary);
+        }
+
+        [Route("RaceSummary")]
+        [HttpGet]
+        [Produces("application/json", Type = typeof(RaceSummary))]
+        public async Task<IActionResult> GetRaceSummary()
+        {
+            var raceSummaries = await raceBusiness.GetRaceSummary();
+
+            return Ok(raceSummaries);
         }
     }
 }

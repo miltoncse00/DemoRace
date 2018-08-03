@@ -28,7 +28,7 @@ namespace DemoRace.Business
                                 on customer.Id equals bet.CustomerId
                                 group bet by bet.CustomerId into customerbetGroup
                                 select customerbetGroup).ToDictionary(g => g.Key, g => new { BetCount = g.Count(), BetAmount = g.Sum(s => s.Stake) });
-                              
+            decimal totalBets = 0;         
                               
             foreach (var customer in customers)
             {
@@ -39,9 +39,11 @@ namespace DemoRace.Business
                 {
                     customerSummary.BetCount = customerBets[customer.Id].BetCount;
                     customerSummary.BestAmount = customerBets[customer.Id].BetAmount;
+                    totalBets += customerSummary.BestAmount;
                 }
                 customerbetsSummary.CustomerSummaries.Add(customerSummary);
             }
+            customerbetsSummary.TotalBets = totalBets;
             return customerbetsSummary;
         }
 
