@@ -1,0 +1,39 @@
+<div class="panel">
+  <div class="page-header panel-primary panel-heading bg-primary">
+    <h2>Race Summary</h2>
+  </div>
+  <div class="panel-body">
+    
+    
+    <table class="table table-striped">
+      <thead>
+        <tr class="row">
+          <th class="col-md-1">Status</th>
+          <th class="col-md-1">Stake</th>
+          <th class="col-md-10"></th>        
+        </tr>
+      </thead>
+      <tr *ngFor="let raceSummary of raceSummaries" class="row">
+        <td class="col-md-1">{{raceSummary.status}}</td>
+        <td class="col-md-1">{{raceSummary.stake}}</td>
+    <td *ngIf='raceSummary.horses.length>0' class="col-md-10">
+      <table>
+        <tr class="row">
+          <th class="col-md-6">
+            Horse Name
+          </th>
+          <th class="col-md-2">Bet Count</th>
+          <th class="col-md-2">Payout</th>
+        </tr>
+        <tr *ngFor="let horse of raceSummary.horses" class="row">
+          <td class="col-md-6">{{horse.name}}</td>
+          <td class="col-md-2">{{horse.betcount}}</td>
+          <td class="col-md-2">{{horse.payout}}</td>
+        </tr>
+      </table>
+    </td>
+      </tr>
+    </table>
+  </div>
+
+</div>
