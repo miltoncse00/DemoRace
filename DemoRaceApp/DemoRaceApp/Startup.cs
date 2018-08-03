@@ -31,7 +31,7 @@ namespace DemoRaceApp
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "Demo Race API", Version = "v1" });
+                c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "Tech Challenge Syed", Version = "v1" });
             });
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

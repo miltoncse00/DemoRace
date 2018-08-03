@@ -39,7 +39,7 @@ namespace DemoXTests
         }
 
         [Fact]
-        public async void CheckStatusOfRaceWithIntialSetupShouldBeCompleted()
+        public async void CheckStatusOfRaceWithIntialSetupShouldBeCompletedAndDetails()
         {
             await SetUpIntialTestData1();
             var summaries = await raceBusiness.GetRaceSummary();
@@ -53,13 +53,14 @@ namespace DemoXTests
 
 
         [Fact]
-        public async void CheckCustomerBetSummaryWithCustomerCount2()
+        public async void CheckCustomerBetSummaryWithCustomerCount2andDetails()
         {
             await SetUpIntialTestData2();
             var summary = await raceBusiness.GetCustomerBetsSummary();
             summary.CustomerSummaries.Count.Should().Be(2);
             summary.CustomerSummaries[0].BetCount.Should().Be(2);
             summary.CustomerSummaries[0].BestAmount.Should().Be(250);
+            summary.CustomerSummaries[0].RiskIndicator.Should().Be(true);
             summary.TotalBets.Should().Be(250);
         }
 

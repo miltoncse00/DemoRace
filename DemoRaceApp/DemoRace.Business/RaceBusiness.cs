@@ -11,7 +11,7 @@ namespace DemoRace.Business
     public class RaceBusiness : IRaceBusiness
     {
         private readonly IRaceContext context;
-
+        private const decimal RiskIndicatorThresold = 200;
         public RaceBusiness(IRaceContext context)
         {
             this.context = context;
@@ -39,6 +39,7 @@ namespace DemoRace.Business
                 {
                     customerSummary.BetCount = customerBets[customer.Id].BetCount;
                     customerSummary.BestAmount = customerBets[customer.Id].BetAmount;
+                    customerSummary.RiskIndicator = customerSummary.BestAmount > RiskIndicatorThresold;
                     totalBets += customerSummary.BestAmount;
                 }
                 customerbetsSummary.CustomerSummaries.Add(customerSummary);
@@ -71,7 +72,7 @@ namespace DemoRace.Business
                         {
                             var betValue = horseIdBetCountMap[horse.Id];
                             horseSummary.BetCount = betValue.BetCount;
-                            //Consider the formually that Payout will be Stake for all customer * odds
+                            //Consider the formula that Payout will be Stake for all customer * odds
                             horseSummary.PayOut = betValue.TotalStake * horse.Odds;
                         }
                         else
