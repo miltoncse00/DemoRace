@@ -55,9 +55,11 @@ namespace DemoXTests
         [Fact]
         public async void CheckCustomerBetSummaryWithCustomerCount2()
         {
-            await SetUpIntialTestData1();
+            await SetUpIntialTestData2();
             var summary = await raceBusiness.GetCustomerBetsSummary();
             summary.CustomerSummaries.Count.Should().Be(2);
+            summary.CustomerSummaries[0].BetCount.Should().Be(2);
+            summary.CustomerSummaries[0].BestAmount.Should().Be(250);
         }
 
 
@@ -81,6 +83,26 @@ namespace DemoXTests
             actualRaces[0].Horses[0].Odds.Should().Be(1.5M);
         }
 
+        private async System.Threading.Tasks.Task SetUpIntialTestData2()
+        {
+            customers.Clear();
+            PopulateCustomer1();
+            var actualCustomers = await context.CustomerRepository.GetAll();
+            actualCustomers.Count.Should().Be(2);
+            actualCustomers[0].Name.Should().Be("Rob");
+            bets.Clear();
+            PopulateBet2();
+            var actualBets = await context.BetRepository.GetAll();
+            actualBets.Count.Should().Be(2);
+            actualBets[0].Stake.Should().Be(100);
+            races.Clear();
+            PopulateRaces1();
+            var actualRaces = await context.RaceRepository.GetAll();
+            actualRaces.Count.Should().Be(1);
+            actualRaces[0].Horses.Count.Should().Be(2);
+            actualRaces[0].Horses[0].Odds.Should().Be(1.5M);
+        }
+
         private void PopulateCustomer1()
         {
             customers.Add(new Customer() { Id = 1, Name = "Rob" });
@@ -91,6 +113,13 @@ namespace DemoXTests
         {
             bets.Add(new Bet() { CustomerId = 1, HorseId = 1, RaceId = 1, Stake = 100, Won = true });
             bets.Add(new Bet() { CustomerId = 3, HorseId = 2, RaceId = 1, Stake = 150, Won = true });
+        }
+
+
+        private void PopulateBet2()
+        {
+            bets.Add(new Bet() { CustomerId = 1, HorseId = 1, RaceId = 1, Stake = 100, Won = true });
+            bets.Add(new Bet() { CustomerId = 1, HorseId = 2, RaceId = 1, Stake = 150, Won = true });
         }
 
         private void PopulateRaces1()

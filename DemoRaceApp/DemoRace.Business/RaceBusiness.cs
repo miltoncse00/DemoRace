@@ -22,11 +22,24 @@ namespace DemoRace.Business
             var customerbetsSummary = new CustomerBetSummary();
             customerbetsSummary.CustomerSummaries = new List<CustomerSummary>();
             var customers = await context.CustomerRepository.GetAll();
-            foreach(var customer in customers)
+            var bets = await context.BetRepository.GetAll();
+            var customerBets = (from customer in customers
+                                join bet in bets
+                                on customer.Id equals bet.CustomerId
+                                group bet by bet.CustomerId into customerbetGroup
+                                select customerbetGroup).ToDictionary(g => g.Key, g => new { BetCount = g.Count(), BetAmount = g.Sum(s => s.Stake) });
+                              
+                              
+            foreach (var customer in customers)
             {
                 var customerSummary = new CustomerSummary();
                 customerSummary.Id = customer.Id;
-                customerSummary.Name = customer.Name;
+                customerSummary.Name = customer.Name;                
+                if(customerBets.ContainsKey(customer.Id))
+                {
+                    customerSummary.BetCount = customerBets[customer.Id].BetCount;
+                    customerSummary.BestAmount = customerBets[customer.Id].BetAmount;
+                }
                 customerbetsSummary.CustomerSummaries.Add(customerSummary);
             }
             return customerbetsSummary;
