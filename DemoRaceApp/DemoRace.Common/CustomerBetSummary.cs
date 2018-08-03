@@ -10,6 +10,6 @@ namespace DemoRace.Common
         public IList<CustomerSummary> CustomerSummaries { get; set; }
 
         [Description("Total bet amount")]
-        public decimal TotalBets { get; set; }
+        public decimal TotalBetValue { get; set; }
     }
 }

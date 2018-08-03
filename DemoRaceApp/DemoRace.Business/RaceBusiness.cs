@@ -38,13 +38,13 @@ namespace DemoRace.Business
                 if(customerBets.ContainsKey(customer.Id))
                 {
                     customerSummary.BetCount = customerBets[customer.Id].BetCount;
-                    customerSummary.BestAmount = customerBets[customer.Id].BetAmount;
-                    customerSummary.RiskIndicator = customerSummary.BestAmount > RiskIndicatorThresold;
-                    totalBets += customerSummary.BestAmount;
+                    customerSummary.BetAmount = customerBets[customer.Id].BetAmount;
+                    customerSummary.RiskIndicator = customerSummary.BetAmount > RiskIndicatorThresold;
+                    totalBets += customerSummary.BetAmount;
                 }
                 customerbetsSummary.CustomerSummaries.Add(customerSummary);
             }
-            customerbetsSummary.TotalBets = totalBets;
+            customerbetsSummary.TotalBetValue = totalBets;
             return customerbetsSummary;
         }
 
